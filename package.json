@@ -21,7 +21,10 @@
     "dbmigrate:generate:rollback": "drizzle-kit migrate --generate --rollback",
     "dbmigrate:generate:rollback:latest": "drizzle-kit migrate --generate --rollback --latest",
     "db:studio": "drizzle-kit studio",
+    "db:studio:open": "drizzle-kit studio --open",
     "dbmigrate:reset": "drizzle-kit migrate --reset"
+
+
   },
   "dependencies": {
     "@hookform/resolvers": "^5.1.1",
