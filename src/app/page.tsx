@@ -2,6 +2,8 @@
 "use client";
 import React from "react";
 import Image from "next/image";
+import { authClient } from "@/lib/auth-client";
+// This file is the main entry point for the application, setting up the UI and handling user interactions.
 import { Button } from "@/components/ui/button";
 import {useState} from "react";
 import { Input } from "@/components/ui/input";
@@ -12,7 +14,22 @@ export default function Home() {
 const[email,setEmail]=useState("");
 const[password,setPassword]=useState("");
 const[confirmPassword,setConfirmPassword]=useState("");
-
+const onSubmit =()=>{
+  authClient.signUp.email({
+    email,
+    name,
+    password,
+  },{
+    onError() {
+      console.error("Error during sign up:");
+      window.alert("Error during sign up. Please try again.");
+    },
+    onSuccess() {
+      console.log("Sign up successful!");
+      window.alert("Sign up successful! Please check your email for verification.");
+    }
+  })
+}
  
   return (
 
@@ -20,9 +37,15 @@ const[confirmPassword,setConfirmPassword]=useState("");
       <Input
       placeholder="name" value={name} onChange={(e)=>setName(e.target.value)}/>
       <Input
-      placeholder="name" value={name} onChange={(e)=>setName(e.target.value)}/>
+      placeholder="email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
       <Input
-      placeholder="name" value={name} onChange={(e)=>setName(e.target.value)}/>
+      placeholder="password" value={password} onChange={(e)=>setPassword(e.target.value)}/>
+    <Button onClick={onSubmit} >
+
+      Create User
+    </Button>
+    
     </div>
+    
   );
 }
